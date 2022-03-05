@@ -30,34 +30,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnGetWeatherby_CityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="2"
+            android:text="weather by city name" />
+
+        <Button
+            android:id="@+id/btnGetWeatherby_CityID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1.4"
+            android:text="Weather by city id" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnGetCity_ID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:text="Get city ID" />
-
-        <Button
-            android:id="@+id/btnGetWeatherby_CityName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:text="weather by name" />
-
-        <Button
-            android:id="@+id/btnGetWeatherby_CityID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:text="Weather by id" />
-
+            android:layout_marginBottom="3dp"
+            android:text="get city id" />
     </LinearLayout>
 
     <ListView
