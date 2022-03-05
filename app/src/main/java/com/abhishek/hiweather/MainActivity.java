@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,10 +22,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText et_UserInput;
     Button btnGet_CityID, btnWeatherBy_CityName, btnWeatherBy_CityID;
+    ListView lv_WeatherReport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         btnGet_CityID = findViewById(R.id.btnGetCity_ID);
         btnWeatherBy_CityName = findViewById(R.id.btnGetWeatherby_CityName);
         btnWeatherBy_CityID = findViewById(R.id.btnGetWeatherby_CityID);
+        lv_WeatherReport = findViewById(R.id.lv_WeatherReport);
 
         Weather_Data weather_data = new Weather_Data(MainActivity.this);
 
@@ -44,12 +50,33 @@ public class MainActivity extends AppCompatActivity {
                 weather_data.getCityID(et_UserInput.getText().toString() , new Weather_Data.VolleyResponseListener() {
                     @Override
                     public void onError(String message) {
-                        Toast.makeText(MainActivity.this, "Error occurred", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onResponse(String cityID) {
-                        Toast.makeText(MainActivity.this, "Returned an ID of : "+cityID, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "City Id : " + cityID, Toast.LENGTH_LONG).show();
+                    }
+                });
+
+            }
+        });
+
+        btnWeatherBy_CityID.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                weather_data.getCityForecastByID(et_UserInput.getText().toString() , new Weather_Data.ForecastByID_Response() {
+
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this, "Something went wrong....", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(List<WeatherReport_Modal> weatherReport_modal) {
+                        ArrayAdapter adapter = new ArrayAdapter(MainActivity.this , android.R.layout.simple_list_item_1 , weatherReport_modal);
+                        lv_WeatherReport.setAdapter(adapter);
                     }
                 });
 
@@ -59,14 +86,20 @@ public class MainActivity extends AppCompatActivity {
         btnWeatherBy_CityName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                weather_data.getCityForecastByName(et_UserInput.getText().toString() , new Weather_Data.GetCityForecastByName() {
 
-            }
-        });
 
-        btnWeatherBy_CityID.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this, "Something went wrong....", Toast.LENGTH_SHORT).show();
+                    }
 
+                    @Override
+                    public void onResponse(List<WeatherReport_Modal> weatherReportModals) {
+                        ArrayAdapter adapter = new ArrayAdapter(MainActivity.this , android.R.layout.simple_list_item_1 , weatherReportModals);
+                        lv_WeatherReport.setAdapter(adapter);
+                    }
+                });
             }
         });
     }
