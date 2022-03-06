@@ -48,15 +48,13 @@ public class WeatherReport_Modal {
     @Override
     public String toString() {
         return
-                "Weather_state_name = '" + weather_state_name + '\'' +
-                ", Applicable_date = '" + applicable_date + '\'' +
-                ", Min_temp = " + min_temp +
-                ", Max_temp = " + max_temp +
-                ", Wind_speed = " + wind_speed +
-                ", Air_pressure = " + air_pressure +
-                ", Humidity = " + humidity +
-                ", Visibility = " + visibility +
-                ", Predictability = " + predictability;
+                "Weather_State = " + weather_state_name + "\n" +
+                "Applicable_Date = " + applicable_date + "\n" +
+                "Min_temp = " + min_temp + "\n" +
+                "Max_temp = " + max_temp + "\n" +
+                "Wind_Speed = " + wind_speed + "\n" +
+                "Humidity = " + humidity + "\n" +
+                "Predictability = " + predictability;
     }
 
     public int getId() {
