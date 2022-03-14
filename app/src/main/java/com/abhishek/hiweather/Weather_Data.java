@@ -95,8 +95,11 @@ public class Weather_Data {
 
 
                         for (int i = 0; i <consolidated_weather_list.length() ; i++) {
+                            
                             WeatherReport_Modal one_day_report = new WeatherReport_Modal();
+                            
                             JSONObject first_day_from_api = (JSONObject) consolidated_weather_list.get(i);
+                            
                             one_day_report.setId(first_day_from_api.getInt("id"));
                             one_day_report.setWeather_state_name(first_day_from_api.getString("weather_state_name"));
                             one_day_report.setWeather_state_abbr(first_day_from_api.getString("weather_state_abbr"));
@@ -134,6 +137,7 @@ public class Weather_Data {
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
 
     }
+    
 
     public interface GetCityForecastByName{
         void onError(String message);
